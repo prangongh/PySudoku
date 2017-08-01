@@ -1,1 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
 
+	<!-- Basic Meta Info -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="Prangon Ghose, Matthew Cen">
+
+	<title>PySudoku</title>
+
+	<!--Icon-->
+	<link rel="icon" type="image/jpeg" href="../static/img/icon.JPG">
+
+	<!-- Bootstrap core CSS -->
+	<link href="../static/css/bootstrap.css" rel="stylesheet">
+
+	<!-- Custom styles -->
+	<link href="../static/css/main.css" rel="stylesheet">
+	<link href="../static/css/font-awesome.min.css" rel="stylesheet">
+
+	<script src="../static/js/jquery.min.js"></script>
+	<script src="../static/js/modernizr.custom.js"></script>
+
+	<!-- jQuery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+	<!--Font Awesome for Icons-->    
+	<script src="https://use.fontawesome.com/0c57642ecc.js"></script>
+	
+	<!--Google Fonts-->
+	<link href="https://fonts.googleapis.com/css?family=Lato|Open+Sans|Poiret+One" rel="stylesheet">
+
+  </head>
+
+  <body data-spy="scroll" data-offset="0" data-target="#theMenu">
+		
+	<!-- Menu -->
+	<nav class="menu" id="theMenu">
+		<div class="menu-wrap">
+			<h1 class="logo"><a href="#home" class="smoothScroll">PySudoku</a></h1>
+
+			<i class="icon-remove menu-close fa-lg"></i>
+
+			<a href="#home" class="smoothScroll">Home</a>
+			<a href="#rules" class="smoothScroll">Instructions</a>
+			<a href="#game" class="smoothScroll">Game</a>
+
+		</div>
+		
+		<!-- Menu button -->
+		<div id="menuToggle"><i class="icon-reorder"></i></div>
+	</nav>
+
+
+	
+	<!-- ========== HEADER SECTION ========== -->
+		<section id="home" name="home"></section>
+		<header id="headerwrap">
+			<div class="container">
+				<br>
+				<div class="row">
+					<h1>Py<span class="bluetext">Sudoku</span></h1>
+
+					<br>
+
+					<hr>
+
+					<h3>The <span class="ojtext">Ultimate</span> Game of <span class="ojtext">Sudoku</span></h3>
+
+					<br>
+					<br>
+					<br>
+
+					<h4><a href="#rules" class="smoothScroll">Begin</a></h4>
+
+					<br>
+
+					<br>
+					<div class="col-lg-6 col-lg-offset-3">
+					</div>
+				</div>
+			</div><!-- end of container -->
+		</header><!-- end of header -->
+		
+		<!-- ========== INSTRUCTIONS SECTION ========== -->
+		<section id="rules" name="rules"></section>
+		<article id="f">
+			<div class="container">
+				<div class="row">
+					<h3>INSTRUCTIONS</h3>
+					<p class="centered"><i class="icon icon-circle"></i><i class="icon icon-circle"></i><i class="icon icon-circle"></i></p>
+					
+					<p><span class="bluetext">Sudoku</span> is a number placing puzzle based on a 9x9 grid with several given numbers.</p>
+					<p>The object is to <span class="ojtext">place the numbers</span> 1 to 9 in the empty squares so that each row, </p>
+					<p>each column and each 3x3 box <span class="bluetext">contains the same number only once</span>.</p>
+					
+					<br />
+					
+					<p>In this version of the classic game, you will go through various levels of Sudoku,</p>
+					<p>starting from a 3x3 and completing each game until you reach the <span class="ojtext">ultimate</span> level, the <span class="bluetext">9x9</span> grid.</p>
+					
+					<br />
+
+					<h4><a href="#game" class="smoothScroll">Start Solving!</a></h4>
+				</div>
+			</div><!-- /container -->
+		</article><!-- end of #f -->	
+
+		<!-- ========== GAME SECTION ========== -->
+		<section id="game" name="game"></section>
+		<article id="f">
+			<div class="container">
+				<div class="row">
+					<h3>Sudoku</h3>
+					<p class="centered"><i class="icon icon-circle"></i><i class="icon icon-circle"></i><i class="icon icon-circle"></i></p>
+					
+					<ul class="social_media">
+					
+						<p>Select a <span class="ojtext">Difficulty</span> Setting:</p>
+						
+						<form>
+							<select name="difficulty" onchange='if(this.value != 0) { this.form.submit(); }'>
+	  							<option value="easy">Easy</option>
+								<option value="medium">Medium</option>
+								<option value="hard">Hard</option>
+								<option value="insane">Insane</option>
+							</select>
+						</form>
+					
+					</ul>
+					
+					<table class="gameTable" border="1">
+						{% for row in range(0,9) %}
+							<tr>
+								{% for col in range(0,9) %}
+									{% if sudokuMatrix[row][col] == 0 %}
+										<td><input type="text" size="1" maxlength="1"/></td>
+									{% else %}
+										<td> {{ sudokuMatrix[row][col] }} </td>
+									{% endif %}
+								{% endfor %}
+							</tr>
+						{% endfor %}
+						
+					</table>
+					<button class="btn btn-primary" id="btn-solve" data-toggle="modal" href='#modal-id'>Solve</button><button class="btn btn-primary" id="btn-new">New Game</button>
+				</div>
+				<div class="modal fade" id="modal-id">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-body">
+								<p>Great Job! You have solved this Sudoku puzzle. Click New Game to solve another Sudoku puzzle.</p>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div><!-- /container -->
+		</article><!-- end of #f -->	
+
+		<section id="footer" name="footer"></section>
+		<footer id="f">
+			<div class="container">
+				<div class="row">
+
+					<p>&copy; Copyright 2017 <span class="bluetext">Prangon Ghose</span> & <span class="ojtext">Matthew Cen</span></p>
+
+				</div>
+			</div>
+		</footer> <!-- end of footer -->
+
+		<!-- Bootstrap core JavaScript -->
+		<script src="../static/js/classie.js"></script>
+		<script src="../static/js/bootstrap.min.js"></script>
+		<script src="../static/js/smoothscroll.js"></script>
+		<!--Correct Sudoku Validation-->
+		<script src="../static/js/validation.js"></script>
+		<script src="../static/js/main.js"></script>
+		
+	</body>
+</html>
